@@ -2018,11 +2018,14 @@
                         (shapeCanvas.height / fontSize) * (isNumber(l) ? 1 : 0.45) * fontSize);
                     if (l == '2026') {
                         gap = 3
+                        fit();
                         setFontSize(110);
                     } else {
                         gap = 3
+                        fit();
                         if (l < 6) {
                             gap = 8;
+                            fit();
                             setFontSize(250);
                         } else {
                             setFontSize(s);
