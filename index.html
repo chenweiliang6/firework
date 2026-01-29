@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>祝福春春同学</title>
+    <title>跨年烟花</title>
     <style>
         * {
             margin: 0;
@@ -1636,7 +1636,7 @@
                 document.body.classList.add('body--ready');
 
 
-                S.UI.simulate('|2026|小陈祝|春春|新春快乐|希望你新的一年全力以赴|愿你的每一份努力都有回响|顺利上岸|无论结果如何|你都是最棒的');
+                S.UI.simulate('|倒计时|#countdown 5||小陈祝|春春|新春快乐|希望你新的一年全力以赴|愿你的每一份努力都有回响|顺利上岸|无论结果如何|你都是最棒的|');
 
                 S.Drawing.loop(function () {
                     S.Shape.render();
@@ -1937,7 +1937,7 @@
         };
 
         S.ShapeBuilder = (function () {
-            var gap = 8,
+            var gap = 6,
                 shapeCanvas = document.createElement('canvas'),
                 shapeContext = shapeCanvas.getContext('2d'),
                 fontSize = 110,
@@ -1993,17 +1993,15 @@
             function isNumber(n) {
                 return !isNaN(parseFloat(n)) && isFinite(n);
             }
-
-            function init() {
-                fit();
-                window.addEventListener('resize', fit);
-            }
-
-            function drawTextWithLineBreaks(context, text, x, y,lineHeight=200) {
+            function drawTextWithLineBreaks(context, text, x, y, lineHeight = 150) {
                 const lines = String(text) ? String(text).split('\n') : []; // 按换行符分割字符串
                 for (let i = 0; i < lines.length; i++) {
                     context.fillText(lines[i], x, y + (i * lineHeight)); // 逐行绘制，计算每行y坐标
                 }
+            }
+            function init() {
+                fit();
+                window.addEventListener('resize', fit);
             }
 
             init();
@@ -2011,18 +2009,23 @@
             return {
                 letter: function (l) {
                     var s = 0;
-                    console.log(fontSize,'fontSize');
-                    
+
                     setFontSize(fontSize);
                     s = Math.min(fontSize,
-                        (shapeCanvas.width / shapeContext.measureText('你好呀春').width) * 0.8 * fontSize,
+                        (shapeCanvas.width / shapeContext.measureText('你好呀1').width) * 0.8 * fontSize,
                         (shapeCanvas.height / fontSize) * (isNumber(l) ? 1 : 0.45) * fontSize);
-                    setFontSize(s);
-
+                    if (l == '2026') {
+                        setFontSize(110);
+                    } else {
+                        if (l < 6) {
+                            setFontSize(250);
+                        } else {
+                            setFontSize(s);
+                        }
+                    }
                     shapeContext.clearRect(0, 0, shapeCanvas.width, shapeCanvas.height);
-
-                    drawTextWithLineBreaks(shapeContext, l, shapeCanvas.width / 2, shapeCanvas.height / 2)
                     // shapeContext.fillText(l, shapeCanvas.width / 2, shapeCanvas.height / 2);
+                    drawTextWithLineBreaks(shapeContext, l, shapeCanvas.width / 2, shapeCanvas.height / 2)
 
                     return processCanvas();
                 }
@@ -2073,7 +2076,7 @@
                         if (dots[d].s) {
                             dots[d].move(new S.Point({ z: Math.random() * 20 + 10, a: Math.random(), h: 18 }));
                         } else {
-                            dots[d].move(new S.Point({ z: Math.random() * 5 + 5, h: fast ? 18 : 1/8 }));
+                            dots[d].move(new S.Point({ z: Math.random() * 5 + 5, h: fast ? 18 : 18 }));
                         }
 
                         dots[d].s = true;
@@ -2081,7 +2084,7 @@
                             x: n.dots[i].x + cx,
                             y: n.dots[i].y + cy,
                             a: 1,
-                            z: 4,
+                            z: 3,
                             h: 0
                         }));
 
