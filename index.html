@@ -1937,7 +1937,7 @@
         };
 
         S.ShapeBuilder = (function () {
-            var gap = 4,
+            var gap = 3,
                 shapeCanvas = document.createElement('canvas'),
                 shapeContext = shapeCanvas.getContext('2d'),
                 fontSize = 110,
@@ -1993,7 +1993,7 @@
             function isNumber(n) {
                 return !isNaN(parseFloat(n)) && isFinite(n);
             }
-            function drawTextWithLineBreaks(context, text, x, y, lineHeight = 150) {
+            function drawTextWithLineBreaks(context, text, x, y, lineHeight = 120) {
                 const lines = String(text) ? String(text).split('\n') : []; // 按换行符分割字符串
                 for (let i = 0; i < lines.length; i++) {
                     context.fillText(lines[i], x, y + (i * lineHeight)); // 逐行绘制，计算每行y坐标
