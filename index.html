@@ -1762,7 +1762,7 @@
                         case 'countdown':
                             val = parseInt(val) || 10;
                             val = val > 0 ? val : 10;
-
+                            gap = 8;
                             timedAction(function (index) {
                                 if (index === 0) {
                                     if (sequence.length === 0) {
@@ -1937,7 +1937,7 @@
         };
 
         S.ShapeBuilder = (function () {
-            var gap = 4,
+            var gap = 3,
                 shapeCanvas = document.createElement('canvas'),
                 shapeContext = shapeCanvas.getContext('2d'),
                 fontSize = 110,
@@ -1952,6 +1952,8 @@
             }
 
             function processCanvas() {
+                console.log(gap, 'gap111');
+
                 var pixels = shapeContext.getImageData(0, 0, shapeCanvas.width, shapeCanvas.height).data,
                     dots = [],
                     x = 0,
@@ -2015,9 +2017,12 @@
                         (shapeCanvas.width / shapeContext.measureText('你好呀1').width) * 0.8 * fontSize,
                         (shapeCanvas.height / fontSize) * (isNumber(l) ? 1 : 0.45) * fontSize);
                     if (l == '2026') {
+                        gap = 3
                         setFontSize(110);
                     } else {
+                        gap = 3
                         if (l < 6) {
+                            gap = 8;
                             setFontSize(250);
                         } else {
                             setFontSize(s);
@@ -2084,7 +2089,7 @@
                             x: n.dots[i].x + cx,
                             y: n.dots[i].y + cy,
                             a: 1,
-                            z: 3,
+                            z: 2,
                             h: 0
                         }));
 
